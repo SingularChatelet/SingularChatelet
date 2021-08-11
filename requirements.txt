@@ -7,3 +7,4 @@ torch
 git+https://github.com/huggingface/transformers.git
 
 discord.py
+python-dotenv
