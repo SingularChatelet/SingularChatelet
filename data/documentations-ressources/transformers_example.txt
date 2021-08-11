@@ -1,0 +1,2 @@
+https://www.thepythoncode.com/article/conversational-ai-chatbot-with-huggingface-transformers-in-python
+https://huggingface.co/microsoft/DialoGPT-medium#how-to-use
