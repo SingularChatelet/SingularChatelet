@@ -1,11 +1,14 @@
 import os
+from dotenv import load_dotenv
 
 # Discord Bot
 from discord import Intents
 from discord.ext.commands import Bot
 from discord.ext.commands import when_mentioned_or
 
-TOKEN = "NzEwNDA3MjY0MDcwMTM5OTQ0.Xr0AUg.o2hFHXFOamuFBJdmSMj0-Tp159A"#os.environ["DISCORD_TOKEN"]
+load_dotenv()
+
+TOKEN = os.environ["DISCORD_TOKEN"]
 PREFIX = when_mentioned_or('.')
 INTENTS = Intents.all()
 
