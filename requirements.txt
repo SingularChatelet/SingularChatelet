@@ -3,7 +3,8 @@
 
 #tensorflow
 torch
-git+https://github.com/huggingface/transformers.git
+#git+https://github.com/huggingface/transformers.git
+git+https://github.com/Saverio976/fork-transformers.git
 
 discord.py
 python-dotenv
