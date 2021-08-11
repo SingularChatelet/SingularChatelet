@@ -2,3 +2,4 @@ __pycache__
 .env
 data/transformers/
 data/chatterbot/
+lib/

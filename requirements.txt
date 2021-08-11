@@ -1,5 +1,5 @@
-./lib/ChatterBot
-./lib/chatterbot-corpus
+git+https://github.com/Saverio976/fork-ChatterBot.git
+git+https://github.com/Saverio976/fork-chatterbot-corpus.git
 
 tensorflow
 torch
