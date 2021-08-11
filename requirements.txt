@@ -1,0 +1,9 @@
+pypdandoc
+./lib/ChatterBot
+./lib/chatterbot-corpus
+
+tensorflow
+torch
+git+https://github.com/huggingface/transformers.git
+
+discord.py
