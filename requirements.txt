@@ -1,4 +1,3 @@
-pypdandoc
 ./lib/ChatterBot
 ./lib/chatterbot-corpus
 
