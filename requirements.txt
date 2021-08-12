@@ -1,7 +1,6 @@
-git+https://github.com/Saverio976/fork-ChatterBot.git
-git+https://github.com/Saverio976/fork-chatterbot-corpus.git
+git+https://github.com/SingularChatelet/ChatterBot.git
+git+https://github.com/SingularChatelet/chatterbot-corpus.git
 
-#tensorflow
 torch
 git+https://github.com/huggingface/transformers.git
 
