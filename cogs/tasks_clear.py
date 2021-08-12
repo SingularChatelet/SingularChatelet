@@ -19,7 +19,7 @@ class ClearTask(commands.Cog):
                 if conversation['time'] < time_marge:
                     to_remove.append((guild, user))
         for guild, user in to_remove:
-            del self.bot.conversation[guild][user]
+            del self.bot.conversations[guild][user]
 
 def setup(bot:commands.Bot):
     bot.add_cog(ClearTask(bot))
