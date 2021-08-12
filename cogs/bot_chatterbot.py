@@ -15,7 +15,7 @@ except OSError:
 
 class Bot_ChatterBot(commands.Cog):
     def __init__(self, bot:commands.Bot):
-        """Cogs related to ChatterBot lib"""
+        """Cogs related to ChatterBot lib."""
         self.bot:commands.Bot = bot
         self._chatbot = ChatBot(
             name='SingularChatelet',

@@ -5,6 +5,7 @@ from discord.ext import tasks
 
 class ClearTask(commands.Cog):
     def __init__(self, bot:commands.Bot):
+        """Clear conversations history."""
         self.bot = bot
         self.clear_conversations.start()
         print("Tasks_ClearConversation init ready!")
@@ -24,7 +25,7 @@ class ClearTask(commands.Cog):
     @commands.guild_only()
     @commands.command()
     async def clear_my_history(self, ctx:commands.Context):
-        """Clear message history of the user for .pt"""
+        """Clear message history of the user for .pt."""
         guild = str(ctx.guild.id)
         user = str(ctx.author.id)
         if guild not in self.bot.conversations:
