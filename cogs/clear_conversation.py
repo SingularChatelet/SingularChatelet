@@ -21,5 +21,20 @@ class ClearTask(commands.Cog):
         for guild, user in to_remove:
             del self.bot.conversations[guild][user]
 
+    @commands.guild_only()
+    @commands.command()
+    async def clear_my_history(self, ctx:commands.Context):
+        """Clear message history of the user for .pt"""
+        guild = str(ctx.guild.id)
+        user = str(ctx.author.id)
+        if guild not in self.bot.conversations:
+            await ctx.send('no conversation history for now')
+            return None
+        if user not in self.bot.conversations[guild]:
+            await ctx.send('no conversation history for now')
+            return None
+        del self.bot.conversations[guild][user]
+        await ctx.send('Conversation history delete!')
+
 def setup(bot:commands.Bot):
     bot.add_cog(ClearTask(bot))

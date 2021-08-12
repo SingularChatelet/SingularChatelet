@@ -14,6 +14,7 @@ from transformers import AutoModelForCausalLM
 
 class Bot_Transformers(commands.Cog):
     def __init__(self, bot:commands.Bot):
+        """Cogs related to transformers lib"""
         self.bot = bot
         # pre_trained possibility : microsoft/DialoGPT-large | microsoft/DialoGPT-medium | microsoft/DialoGPT-small
         self._tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-large", cache_dir='./data/transformers/')
@@ -21,6 +22,7 @@ class Bot_Transformers(commands.Cog):
         self.bot.conversations = {}
         print('Bot_Transformers init ready!')
 
+    @commands.guild_only()
     @commands.command(aliases=['pytorch'])
     async def pt(self, ctx:commands.Context, *, sentence):
         """Uses microsoft/DialoGPT-large and pytorch to generate the response."""
@@ -50,6 +52,12 @@ class Bot_Transformers(commands.Cog):
                 outputs,
                 inputs_history
             )
+            if len(str(response)) < 1:
+                await ctx.send(
+                    '[system message] no reponse for that',
+                    reference=ctx.message.to_reference()
+                )
+                return None
             await ctx.send(str(response), reference=ctx.message.to_reference())
 
     def wraper_tokenizer_encode(self, text, return_tensors):
@@ -57,7 +65,7 @@ class Bot_Transformers(commands.Cog):
             text + self._tokenizer.eos_token,
             return_tensors=return_tensors
         )
-    
+
     def wraper_create_history_inputs(self, inputs, guild_id, user_id):
         guild = str(guild_id)
         user = str(user_id)
@@ -73,7 +81,6 @@ class Bot_Transformers(commands.Cog):
                 dim=-1
             )
             self.bot.conversations[guild][user]['time'] = datetime.datetime.now()
-
         return self.bot.conversations[guild][user]['data']
 
     def wraper_model_generate(self, inputs):
@@ -92,6 +99,6 @@ class Bot_Transformers(commands.Cog):
             outputs[:,inputs_history.shape[-1]:][0],
             skip_special_tokens=True
         )
-    
+
 def setup(bot:commands.Bot):
     bot.add_cog(Bot_Transformers(bot))

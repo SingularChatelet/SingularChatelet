@@ -10,11 +10,12 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 import subprocess, sys, spacy
 try:
     _ = spacy.load('en_core_web_sm')
-except:
+except OSError:
     subprocess.run([sys.executable, '-m', 'spacy', 'download', 'en_core_web_sm'], universal_newlines=True)
 
 class Bot_ChatterBot(commands.Cog):
     def __init__(self, bot:commands.Bot):
+        """Cogs related to ChatterBot lib"""
         self.bot:commands.Bot = bot
         self._chatbot = ChatBot(
             name='SingularChatelet',
@@ -28,7 +29,8 @@ class Bot_ChatterBot(commands.Cog):
         trainer_corpus = ChatterBotCorpusTrainer(self._chatbot, show_training_progress=False)
         trainer_corpus.train('chatterbot.corpus.english')
         print("Bot_ChatterBot init ready!")
-    
+
+    @commands.guild_only()
     @commands.command(aliases=['chatterbot'])
     async def cb(self, ctx:commands.Context, *,sentence):
         """Use chatterbot.corpus.english and ChatterBot to generate response."""
@@ -40,7 +42,7 @@ class Bot_ChatterBot(commands.Cog):
                 sentence
             )
             await ctx.send(response, reference=ctx.message.to_reference())
-        
+
 
 def setup(bot:commands.Bot):
     bot.add_cog(Bot_ChatterBot(bot))
