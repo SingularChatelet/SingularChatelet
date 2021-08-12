@@ -4,7 +4,7 @@ from discord.ext import commands
 
 def check_is_alowed():
     def predicate(ctx:commands.Context):
-        list_alowed = []
+        list_alowed = [606758395583922176]
         return ctx.author.id in list_alowed
     return commands.check(predicate)
 
