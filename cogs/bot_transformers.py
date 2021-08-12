@@ -14,7 +14,7 @@ from transformers import AutoModelForCausalLM
 
 class Bot_Transformers(commands.Cog):
     def __init__(self, bot:commands.Bot):
-        """Cogs related to transformers lib"""
+        """Cogs related to transformers lib."""
         self.bot = bot
         # pre_trained possibility : microsoft/DialoGPT-large | microsoft/DialoGPT-medium | microsoft/DialoGPT-small
         self._tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-large", cache_dir='./data/transformers/')
