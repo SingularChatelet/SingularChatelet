@@ -4,12 +4,26 @@ A discord bot to speak with.
 
 ## commands
 
-It has 2 commands :
+It has 2 chat commands :
 ```shell
 -   .pt <the sentence here>
         speak with the transformers/pytorch part
 -   .cb <the sentence here>
         speak with the ChatterBot part
+```
+And 1 clear :
+```shell
+-   .clear_my_history
+        Clear message history of the user for .pt.
+```
+And for the bot owner :
+```shell
+-   .delete_conversations
+        Delete all current conversations history. Mainly for ressource usage
+-   .re_init_transformers_data
+        If the data is corumpted by bias, re init the data.
+-   .shutdown
+        Close the bot
 ```
 
 ## launch
