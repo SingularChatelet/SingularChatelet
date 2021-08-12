@@ -4,6 +4,7 @@ from discord.ext import commands
 class On_Event(commands.Cog):
     def __init__(self, bot:commands.Bot):
         self.bot = bot
+        print('On_Event init ready!')
 
     @commands.Cog.listener()
     async def on_ready(self):

@@ -1,10 +1,11 @@
+import os
+import datetime
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 from discord.ext import commands
 
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
-
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 # Transformers
 import torch
@@ -15,9 +16,9 @@ class Bot_Transformers(commands.Cog):
     def __init__(self, bot:commands.Bot):
         self.bot = bot
         # pre_trained possibility : microsoft/DialoGPT-large | microsoft/DialoGPT-medium | microsoft/DialoGPT-small
-        self._tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-medium", cache_dir='./data/transformers/')
-        self._model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-medium", cache_dir='./data/transformers/')
-        self.conversation = {}
+        self._tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-large", cache_dir='./data/transformers/')
+        self._model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-large", cache_dir='./data/transformers/')
+        self.bot.conversations = {}
         print('Bot_Transformers init ready!')
 
     @commands.command(aliases=['pytorch'])
@@ -60,24 +61,28 @@ class Bot_Transformers(commands.Cog):
     def wraper_create_history_inputs(self, inputs, guild_id, user_id):
         guild = str(guild_id)
         user = str(user_id)
-        if guild not in self.conversation:
-            self.conversation[guild] = {}
-        if user not in self.conversation[guild]:
-            self.conversation[guild][user] = inputs
+        if guild not in self.bot.conversations:
+            self.bot.conversations[guild] = {}
+        if user not in self.bot.conversations[guild]:
+            self.bot.conversations[guild][user] = {}
+            self.bot.conversations[guild][user]['data'] = inputs
+            self.bot.conversations[guild][user]['time'] = datetime.datetime.now()
         else:
-            self.conversation[guild][user] = torch.cat(
-                [self.conversation[guild][user], inputs],
+            self.bot.conversations[guild][user]['data'] = torch.cat(
+                [self.bot.conversations[guild][user]['data'], inputs],
                 dim=-1
             )
-        return self.conversation[guild][user]
+            self.bot.conversations[guild][user]['time'] = datetime.datetime.now()
+
+        return self.bot.conversations[guild][user]['data']
 
     def wraper_model_generate(self, inputs):
         return self._model.generate(
             inputs,
             max_length=1000,
             do_sample=True,
-            top_k=100,
             top_p=0.95,
+            top_k=100,
             temperature=0.75,
             pad_token_id=self._tokenizer.eos_token_id
         )
