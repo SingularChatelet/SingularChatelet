@@ -20,7 +20,7 @@ python -m pip install -r requirements.txt
 python main.py
 ```
 
-# folder:
+## folder:
 
 - /cogs : where commmands are
 - /data/chatterbot  : the database for chatterbot
@@ -28,3 +28,6 @@ python main.py
 - /data/documentations-ressources   : .txt file with good ressource to start
 - /lib/ChatterBot   : (the github repo contain some error) the chatterbot lib
 - /lib/chatterbot-corpus/   : the chatterbot-corpus module to enhance chatterbot
+
+## License
+MIT
