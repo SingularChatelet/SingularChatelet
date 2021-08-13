@@ -7,12 +7,6 @@ from concurrent.futures import ThreadPoolExecutor
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 
-import subprocess, sys, spacy
-try:
-    _ = spacy.load('en_core_web_sm')
-except OSError:
-    subprocess.run([sys.executable, '-m', 'spacy', 'download', 'en_core_web_sm'], universal_newlines=True)
-
 class Bot_ChatterBot(commands.Cog):
     def __init__(self, bot:commands.Bot):
         """Cogs related to ChatterBot lib."""
