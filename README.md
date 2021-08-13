@@ -45,12 +45,10 @@ python main.py
 
 ## folder
 
--   /cogs : where commmands are
--   /data/chatterbot  : the database for chatterbot
--   /data/transformers    : the database for transformers
--   /data/documentations-ressources   : .txt file with good ressource to start
--   /lib/ChatterBot   : (the github repo contain some error) the chatterbot lib
--   /lib/chatterbot-corpus/   : the chatterbot-corpus module to enhance chatterbot
-
+-   /cogs                               : where commmands are
+-   /data/chatterbot                    : the database for chatterbot
+-   /data/transformers                  : the database for transformers
+-   /data/documentations-ressources     : .txt file with good ressource to start
+-   /data/image                         : the SingularChatelet profile picture
 ## License
 MIT
