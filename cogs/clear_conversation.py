@@ -46,7 +46,7 @@ class ClearTask(commands.Cog):
             counter = 0
             async for message in ctx.channel.history(oldest_first=False):
                 if message.author.id == ctx.author.id:
-                    if message.content.startswith('.pt '):
+                    if message.content.startswith('.pt ') or message.content.startswith('.cb '):
                         await message.delete()
                         counter += 1
                 if message.author.id == self.bot.user.id:
