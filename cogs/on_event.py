@@ -19,7 +19,7 @@ class On_Event(commands.Cog):
     async def on_command_error(self, ctx:commands.Context, error):
         """When an command error trigger."""
         if isinstance(error, commands.errors.CommandNotFound):
-            if ctx.message.content.starswith('..'):
+            if ctx.message.content.startswith('..'):
                 return None
             await ctx.send("this command don't exists :eyes:")
             return None
