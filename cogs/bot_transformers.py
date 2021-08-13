@@ -26,7 +26,7 @@ class Bot_Transformers(commands.Cog):
     @commands.command(aliases=['pytorch'])
     async def pt(self, ctx:commands.Context, *, sentence):
         """Uses microsoft/DialoGPT-large and pytorch to generate the response."""
-        async with ctx.typing():
+        async with ctx.typing() as context_manager:
             loop = asyncio.get_event_loop()
             inputs = await loop.run_in_executor(
                 ThreadPoolExecutor(),
@@ -58,7 +58,8 @@ class Bot_Transformers(commands.Cog):
                     reference=ctx.message.to_reference()
                 )
                 return None
-            await ctx.send(str(response), reference=ctx.message.to_reference())
+            await self.bot.chatbot_send.send(ctx, str(response))
+            #await ctx.send('.', delete_after=0.1)
 
     def wraper_tokenizer_encode(self, text, return_tensors):
         return self._tokenizer.encode(
