@@ -35,11 +35,11 @@ class Developper(commands.Cog):
         for file in os.listdir('data/transformers'):
             if not file.endswith('.txt'):
                 os.remove(f'data/transformers/{file}')
-        try: self.bot.unload_extension(f'cogs.bot_transformers')
+        try: self.bot.unload_extension('cogs.bot_transformers')
         except commands.ExtensionNotLoaded: pass
-        try: self.bot.load_extension(f'cogs.bot_transformers')
+        try: self.bot.load_extension('cogs.bot_transformers')
         except Exception as e: await ctx.send(str(e))
         else: await ctx.send('Transformers Data Re Init')
-        
+
 def setup(bot:commands.Bot):
     bot.add_cog(Developper(bot))

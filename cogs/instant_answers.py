@@ -15,7 +15,7 @@ class InstantAnswer(commands.Cog):
 
     @commands.command(aliases=['ddg'])
     async def duckduckgo(self, ctx:commands.Context, *, answer):
-        """Get an Instant Response from duckduckgo"""
+        """Get an Instant Response from duckduckgo."""
         async with ctx.typing():
             url = "https://api.duckduckgo.com/?q="
             search = parse.quote(answer)
@@ -28,7 +28,7 @@ class InstantAnswer(commands.Cog):
             )
             content = result.json()
             emb = discord.Embed(
-                title=f'Instant Answer',
+                title='Instant Answer',
                 description=f'search : {answer}',
                 color=0x2ae53f
             )
