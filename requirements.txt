@@ -1,4 +1,5 @@
 #main packages
+aiosqlite
 spacy
 en-core-web-sm
 torch
