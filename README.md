@@ -4,20 +4,27 @@ A discord bot to speak with.
 
 ## commands
 
-It has 2 chat commands :
-```shell
+It has 2 chat commands:
+```txt
 -   .pt <the sentence here>
         speak with the transformers/pytorch part
 -   .cb <the sentence here>
         speak with the ChatterBot part
 ```
-And 1 clear :
-```shell
+2 clear commands:
+```txt
 -   .clear_my_history
         Clear message history of the user for .pt.
+-   .clear_message_channel
+        Clear your message and bot's message if it respond to you.
 ```
-And for the bot owner :
-```shell
+1 search command:
+```txt
+-   .ddg <query ..>
+        Get an Instant Response from duckduckgo
+```
+And for the bot owner:
+```txt
 -   .delete_conversations
         Delete all current conversations history. Mainly for ressource usage
 -   .re_init_transformers_data
