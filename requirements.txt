@@ -4,5 +4,5 @@ git+https://github.com/SingularChatelet/chatterbot-corpus.git
 torch
 git+https://github.com/huggingface/transformers.git
 
-discord.py
+git+https://github.com/Rapptz/discord.py.git
 python-dotenv
