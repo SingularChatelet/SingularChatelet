@@ -36,7 +36,6 @@ class Bot_ChatterBot(commands.Cog):
                 sentence
             )
             await self.bot.chatbot_send.send(ctx, str(response))
-            #await ctx.send('.', delete_after=0.1)
 
 
 def setup(bot:commands.Bot):

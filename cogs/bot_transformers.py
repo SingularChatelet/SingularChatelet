@@ -59,7 +59,6 @@ class Bot_Transformers(commands.Cog):
                 )
                 return None
             await self.bot.chatbot_send.send(ctx, str(response))
-            #await ctx.send('.', delete_after=0.1)
 
     def wraper_tokenizer_encode(self, text, return_tensors):
         return self._tokenizer.encode(
