@@ -11,6 +11,13 @@ It has 2 chat commands:
 -   .cb <the sentence here>
         speak with the ChatterBot part
 ```
+You can set a custom bot that respond to you (It need manage webhooks permission)
+```txt
+-	.set_my_bot <avatar_url> <name of the bot>
+		Create a custom webhook with name and avatar url. The ChatBot will speek with it.
+-	.remove_my_bot <name of the bot>
+		Remove your custom webhook named 'name'
+```
 2 clear commands:
 ```txt
 -   .clear_my_history
