@@ -26,7 +26,7 @@ class Bot_Transformers(commands.Cog):
     @commands.command(aliases=['pytorch'])
     async def pt(self, ctx:commands.Context, *, sentence):
         """Uses microsoft/DialoGPT-large and pytorch to generate the response."""
-        async with ctx.typing() as context_manager:
+        async with ctx.typing():
             loop = asyncio.get_event_loop()
             inputs = await loop.run_in_executor(
                 ThreadPoolExecutor(),
