@@ -23,8 +23,8 @@ class Bot_Transformers(commands.Cog):
         print('Bot_Transformers init ready!')
 
     @commands.guild_only()
-    @commands.command(aliases=['pytorch'])
-    async def pt(self, ctx:commands.Context, *, sentence):
+    @commands.command(aliases=['pt'])
+    async def pytorch(self, ctx:commands.Context, *, sentence):
         """Uses microsoft/DialoGPT-large and pytorch to generate the response."""
         async with ctx.typing():
             loop = asyncio.get_event_loop()

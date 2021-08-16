@@ -25,8 +25,8 @@ class Bot_ChatterBot(commands.Cog):
         print("Bot_ChatterBot init ready!")
 
     @commands.guild_only()
-    @commands.command(aliases=['chatterbot'])
-    async def cb(self, ctx:commands.Context, *,sentence):
+    @commands.command(aliases=['cb'])
+    async def chatterbot(self, ctx:commands.Context, *,sentence):
         """Use chatterbot.corpus.english and ChatterBot to generate response."""
         async with ctx.typing():
             loop = asyncio.get_event_loop()
