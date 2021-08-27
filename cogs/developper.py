@@ -1,5 +1,3 @@
-import os
-
 from discord.ext import commands
 
 def check_is_alowed():
