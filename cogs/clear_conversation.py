@@ -13,11 +13,13 @@ class ClearTask(commands.Cog):
         """Clear your message and bot's message if it respond to you."""
         async with ctx.typing():
             counter = 0
+            list_commands = ['.bs ', '.ac ', '.brainshopai', '.aichatbot']
             async for message in ctx.channel.history(oldest_first=False):
                 if message.author.id == ctx.author.id:
-                    if message.content.startswith('.pt ') or message.content.startswith('.cb '):
-                        await message.delete()
-                        counter += 1
+                    for query in list_commands:
+                        if message.content.startswith(query):
+                            await message.delete()
+                            counter += 1
                 if message.author.id == self.bot.user.id:
                     refer = message.reference
                     if refer != None:

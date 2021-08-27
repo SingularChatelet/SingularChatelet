@@ -1,41 +1,37 @@
-# SingularChatelet
+# SingularChatelet - branch for heroku
 
 A discord bot to speak with.
+
+#### this branch is set to deal with the 500MB max storage for free app on heroku
 
 ## commands
 
 It has 2 chat commands:
 ```txt
--   .pt <the sentence here>
-        speak with the transformers/pytorch part
--   .cb <the sentence here>
-        speak with the ChatterBot part
+-   .aichatbot <the sentence here>
+        speak using the https://rapidapi.com/farish978/api/ai-chatbot/ api
+-   .brainshopai <the sentence here>
+        speak using the https://brainshop.ai/ api
 ```
-You can set a custom bot that respond to you (It need manage webhooks permission)
+You can set a custom webhook that respond to you (It need manage webhooks permission)
 ```txt
 -	.set_my_bot <avatar_url> <name of the bot>
 		Create a custom webhook with name and avatar url. The ChatBot will speek with it.
 -	.remove_my_bot <name of the bot>
 		Remove your custom webhook named 'name'
 ```
-2 clear commands:
+clear converssation command:
 ```txt
--   .clear_my_history
-        Clear message history of the user for .pt.
 -   .clear_message_channel
         Clear your message and bot's message if it respond to you.
 ```
-1 search command:
+browse an instant answer:
 ```txt
--   .ddg <query ..>
-        Get an Instant Response from duckduckgo
+-   .duckduckgo <query ..>
+        Get an Instant Response from duckduckgo.
 ```
 And for the bot owner:
 ```txt
--   .delete_conversations
-        Delete all current conversations history. Mainly for ressource usage
--   .re_init_transformers_data
-        If the data is corumpted by bias, re init the data.
 -   .shutdown
         Close the bot
 ```
@@ -53,9 +49,8 @@ python main.py
 ## folder
 
 -   /cogs                               : where commmands are
--   /data/chatterbot                    : the database for chatterbot
--   /data/transformers                  : the database for transformers
 -   /data/documentations-ressources     : .txt file with good ressource to start
 -   /data/image                         : the SingularChatelet profile picture
+
 ## License
 MIT

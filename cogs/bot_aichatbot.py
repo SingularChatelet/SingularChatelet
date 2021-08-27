@@ -12,8 +12,8 @@ class Bot_AiChatbot(commands.Cog):
         self.bot = bot
         print("Bot_AiChatbot init ready")
     
-    @commands.command(aliases=["ss"])
-    async def simsimi(self, ctx:commands.Context, *, sentence):
+    @commands.command(aliases=["ac"])
+    async def aichatbot(self, ctx:commands.Context, *, sentence):
         """Use aichatbot api to generate a response."""
         async with ctx.typing():
             url = "https://ai-chatbot.p.rapidapi.com/chat/free"
