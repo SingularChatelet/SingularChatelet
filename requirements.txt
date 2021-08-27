@@ -1,3 +1,4 @@
 #main packages
+python-dotenv
 aiosqlite
 git+https://github.com/Rapptz/discord.py.git
