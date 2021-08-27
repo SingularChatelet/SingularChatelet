@@ -1,7 +1,7 @@
 #main packages
 aiosqlite
+en_core_web_sm
 spacy
-en-core-web-sm
 torch
 
 git+https://github.com/SingularChatelet/ChatterBot.git
