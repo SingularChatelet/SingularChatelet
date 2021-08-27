@@ -11,8 +11,8 @@ from urllib3 import response
 class Bot_BrainShopAI(commands.Cog):
     def __init__(self, bot:commands.Bot):
         """Cogs related to brainshopAI api"""
-        print('Bot_BrainShopAi init ready')
         self.bot = bot
+        print('Bot_BrainShopAi init ready')
 
     @commands.command(aliases=["bs"])
     async def brainshopai(self, ctx:commands.Context, *, sentence):
