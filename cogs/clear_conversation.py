@@ -24,21 +24,6 @@ class ClearTask(commands.Cog):
 
     @commands.guild_only()
     @commands.command()
-    async def clear_my_history(self, ctx:commands.Context):
-        """Clear message history of the user for .pt."""
-        guild = str(ctx.guild.id)
-        user = str(ctx.author.id)
-        if guild not in self.bot.conversations:
-            await ctx.send('no conversation history for now')
-            return None
-        if user not in self.bot.conversations[guild]:
-            await ctx.send('no conversation history for now')
-            return None
-        del self.bot.conversations[guild][user]
-        await ctx.send('Conversation history delete!')
-
-    @commands.guild_only()
-    @commands.command()
     @commands.bot_has_permissions(manage_messages=True, read_message_history=True)
     async def clear_message_channel(self, ctx:commands.Context):
         """Clear your message and bot's message if it respond to you."""
