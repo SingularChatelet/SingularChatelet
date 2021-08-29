@@ -45,9 +45,9 @@ bot._chatterbot_chatbot = ChatBot(
 trainer_corpus = ChatterBotCorpusTrainer(bot._chatterbot_chatbot, show_training_progress=False)
 trainer_corpus.train('chatterbot.corpus.english')
 
-for file in os.listdir('./slash_plugins'):
+for file in os.listdir('plugins'):
     if file.endswith('.py'):
-        bot.load_extension(f'slash_plugins.{file[:-3]}')
+        bot.load_extension(f'plugins.{file[:-3]}')
         print(f'added :: {file}')
 
 bot.run(
