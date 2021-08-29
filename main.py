@@ -1,12 +1,5 @@
 import os
-from importlib import import_module
 from dotenv import load_dotenv
-
-from transformers import AutoTokenizer
-from transformers import AutoModelForCausalLM
-
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
 
 from pyclass import send_webhook
 
@@ -27,23 +20,6 @@ bot = lightbulb.Bot(
     logs="ERROR"
 )
 bot._chatbot_send = send_webhook.SendWebhook()
-# Transformers
-# pre_trained possibility : microsoft/DialoGPT-large | microsoft/DialoGPT-medium | microsoft/DialoGPT-small
-bot._transformers_tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-small", cache_dir='./data/transformers/')
-bot._transformers_model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-small", cache_dir='./data/transformers/')
-bot._transformers_conversations = {}
-# ChatterBot
-bot._chatterbot_chatbot = ChatBot(
-    name='SingularChatelet',
-    read_only=False,
-    storage_adapter='chatterbot.storage.SQLStorageAdapter',
-    database_uri='sqlite:///data/chatterbot/db.sqlite3',
-    logic_adaptaters=[
-        'chatterbot.logic.BestMatch',
-    ]
-)
-trainer_corpus = ChatterBotCorpusTrainer(bot._chatterbot_chatbot, show_training_progress=False)
-trainer_corpus.train('chatterbot.corpus.english')
 
 for file in os.listdir('plugins'):
     if file.endswith('.py'):
