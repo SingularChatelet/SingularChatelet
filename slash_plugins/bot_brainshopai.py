@@ -59,7 +59,7 @@ class BrainShopAI(slash_commands.SlashCommand):
         if 'cnt' not in resp.keys():
             await context.respond(f'bad result : {resp}')
             return None
-        await context.bot._chatbot_send.send(context, str(resp['cnt']))
+        await context.bot._chatbot_send.send(context, str(resp['cnt']), context.options['message'].value)
 
 def load(bot:Bot):
     bot.add_slash_command(BrainShopAI)

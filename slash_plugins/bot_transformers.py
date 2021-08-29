@@ -68,7 +68,7 @@ class Pytorch(slash_commands.SlashCommand):
         if len(str(response)) < 1:
             await context.respond('[system message] no reponse for that')
             return None
-        await context.bot._chatbot_send.send(context, str(response))
+        await context.bot._chatbot_send.send(context, str(response), context.options['message'].value)
 
     def wraper_tokenizer_encode(self, bot, text, return_tensors):
         return bot._transformers_tokenizer.encode(

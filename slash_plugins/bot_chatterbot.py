@@ -35,7 +35,7 @@ class ChatterBot(slash_commands.SlashCommand):
             context.bot._chatterbot_chatbot.get_response,
             context.options['message'].value
         )
-        await context.bot._chatbot_send.send(context, str(response))
+        await context.bot._chatbot_send.send(context, str(response), context.options['message'].value)
 
 def load(bot:Bot):
     bot.add_slash_command(ChatterBot)

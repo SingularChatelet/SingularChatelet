@@ -62,7 +62,7 @@ class Aichatbot(slash_commands.SlashCommand):
             print(result.text)
             await context.respond('Could not execute this command')
             return None
-        await context.bot._chatbot_send.send(context, msg)
+        await context.bot._chatbot_send.send(context, msg, sentence)
             
     @staticmethod 
     def requests_abstract(url, headers, querystring):
