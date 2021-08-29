@@ -12,18 +12,21 @@ class SendWebhook():
             db.commit()
         print('class::SendWebhook::init -> ready')
 
-    async def send(self, ctx:slash_commands.SlashCommandContext, message:str) -> None:
-        if not await self.has_manage_webhook_permission(ctx):
-            await ctx.respond(message)
-            return None
+    async def send(self, ctx:slash_commands.SlashCommandContext, message:str, question:str = None) -> None:
         urls = await self.get_webhook_urls_for(ctx.channel.id ,ctx.author.id)
         if urls == None:
+            bot_user = ctx.bot.get_me()
+            message = f"{bot_user.username if bot_user == None else 'Bot'} >> {message}"
+            if question != None: 
+                message = f"{ctx.author.username} >> {question}\n" + message
             await ctx.respond(message)
             return None
+        if question != None:
+            message = f"{ctx.author.username} >> {question}\n" + f"Reply >> {message}"
         await ctx.bot.rest.execute_webhook(
             token=urls[1],
             webhook=urls[0],
-            content=f"reply for {ctx.author.username} :: {message}"
+            content=message
         )
         await ctx.respond('response sent', flags=messages.MessageFlag.EPHEMERAL)
 
