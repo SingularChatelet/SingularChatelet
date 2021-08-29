@@ -55,5 +55,4 @@ bot.run(
         name='with human | /help',
         type=presences.ActivityType.PLAYING
     ),
-    ignore_session_start_limit=True
 )
