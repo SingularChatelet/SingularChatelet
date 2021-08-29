@@ -4,24 +4,41 @@ import requests
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
-from discord.ext import commands
+import hikari
+import lightbulb
+from lightbulb import slash_commands
 
-class Bot_AiChatbot(commands.Cog):
-    def __init__(self, bot:commands.Bot):
-        """Cogs related to AiChatbot api (on rapideapi)"""
-        self.bot = bot
-        print("Bot_AiChatbot init ready")
-    
-    @commands.command(aliases=["ss"])
-    async def simsimi(self, ctx:commands.Context, *, sentence):
-        """Use aichatbot api to generate a response."""
-        async with ctx.typing():
+class Aichatbot(slash_commands.SlashCommand):
+
+    @property
+    def description(self) -> str:
+        return "Use aichatbot api to generate a response."
+
+    @property
+    def enabled_guilds(self):
+        return None
+
+    @property
+    def options(self):
+        return [
+            hikari.CommandOption(
+                name="message",
+                description="Message to the bot.",
+                type=hikari.OptionType.STRING,
+                is_required=True
+            )
+        ]
+
+    async def callback(self, context:slash_commands.SlashCommandContext) -> None:
+        async with context.channel.trigger_typing():
             url = "https://ai-chatbot.p.rapidapi.com/chat/free"
-            querystring = {"message":sentence, "uid":str(ctx.author.id)}
+            sentence = context.options['message'].value
+            uid = str(context.author.id)
+            querystring = {"message":sentence, "uid":uid}
             key = os.environ.get('RAPID_API_KEY', None)
             if key == None:
                 print('please provide a rapidapi key and subscribe to simsimi api')
-                await ctx.send('Could not execute this command')
+                await context.respond('Could not execute this command')
                 return None
             headers = {
                 'x-rapidapi-host': "ai-chatbot.p.rapidapi.com",
@@ -37,21 +54,20 @@ class Bot_AiChatbot(commands.Cog):
             resp = resp.get('chatbot', None)
             if resp == None:
                 print(result.text)
-                await ctx.send('coul not execute this command')
+                await context.respond('could not execute this command')
                 return None
             msg = resp.get('response', None)
             if msg == None:
                 print(result.text)
-                await ctx.send('Coul not execute this command')
+                await context.respond('Could not execute this command')
                 return None
-            await self.bot.chatbot_send.send(ctx, msg)
-
-
+            await context.bot._chatbot_send.send(context, msg)
+            
     @staticmethod 
     def requests_abstract(url, headers, querystring):
         """abstract the requests call"""
         res = requests.request("GET", url, headers=headers, params=querystring)
         return res
-
-def setup(bot:commands.Bot):
-    bot.add_cog(Bot_AiChatbot(bot))
+        
+def load(bot:lightbulb.Bot):
+    bot.add_slash_command(Aichatbot(), create=True)
