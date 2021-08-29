@@ -6,7 +6,7 @@ from transformers import AutoModelForCausalLM
 from lightbulb import Bot
 from lightbulb import slash_commands
 
-class DevelopperCommand(slash_commands.SlashCommandGroup):
+class Developper(slash_commands.SlashCommandGroup):
     @property
     def description(self) -> str:
         return "Commands for developpers"
@@ -15,7 +15,7 @@ class DevelopperCommand(slash_commands.SlashCommandGroup):
     def enabled_guilds(self):
         return None
 
-@DevelopperCommand.subcommand()
+@Developper.subcommand()
 class Shutdown(slash_commands.SlashSubCommand):
     @property
     def description(self) -> str:
@@ -32,7 +32,7 @@ class Shutdown(slash_commands.SlashSubCommand):
         else:
             context.respond('only the developpers of this bot can shut down the bot')
 
-@DevelopperCommand.subcommand()
+@Developper.subcommand()
 class Re_Init_Transformers_data(slash_commands.SlashSubCommand):
     @property
     def options(self):
@@ -61,4 +61,4 @@ class Re_Init_Transformers_data(slash_commands.SlashSubCommand):
         await context.bot.rest.create_message(channel=channel, content='Download finish! All data were re init')
 
 def load(bot:Bot):
-    bot.add_slash_command(DevelopperCommand)
+    bot.add_slash_command(Developper)

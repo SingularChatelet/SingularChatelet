@@ -2,7 +2,7 @@ import hikari
 from lightbulb import Bot
 from lightbulb import slash_commands
 
-class Bot_Settings(slash_commands.SlashCommandGroup):
+class Settings(slash_commands.SlashCommandGroup):
     @property
     def description(self) -> str:
         return "Settings for all chatbot commands"
@@ -11,7 +11,7 @@ class Bot_Settings(slash_commands.SlashCommandGroup):
     def enabled_guilds(self):
         return None
 
-@Bot_Settings.subcommand()
+@Settings.subcommand()
 class Set_Bot(slash_commands.SlashSubCommand):
     @property
     def options(self):
@@ -45,7 +45,7 @@ class Set_Bot(slash_commands.SlashSubCommand):
         avatar_url = context.options['avatar_url'].value
         await context.bot._chatbot_send.create_webhook_for(context, name, avatar_url)
 
-@Bot_Settings.subcommand()
+@Settings.subcommand()
 class Remove_Bot(slash_commands.SlashSubCommand):
     @property
     def options(self):
@@ -69,4 +69,4 @@ class Remove_Bot(slash_commands.SlashSubCommand):
         await context.respond('Custom webhook has been removed')
 
 def load(bot:Bot):
-    bot.add_slash_command(Bot_Settings)
+    bot.add_slash_command(Settings)
