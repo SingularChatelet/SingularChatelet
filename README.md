@@ -4,35 +4,34 @@ A discord bot to speak with.
 
 #### this branch is set to deal with the 500MB max storage for free app on heroku
 
-## commands
+-> so the bot dont use transformers and chatterbot lib
 
-It has 2 chat commands:
+->if you want to invit him : https://discord.com/api/oauth2/authorize?client_id=710407264070139944&permissions=536870912&scope=bot%20applications.commands
+
+## slash commands
+
+2 chat slash commands:
 ```txt
--   .aichatbot <the sentence here>
+-   /aichatbot message:message here
         speak using the https://rapidapi.com/farish978/api/ai-chatbot/ api
--   .brainshopai <the sentence here>
+-   /brainshopai message:the message here 
         speak using the https://brainshop.ai/ api
 ```
 You can set a custom webhook that respond to you (It need manage webhooks permission)
 ```txt
--	.set_my_bot <avatar_url> <name of the bot>
+-	/settings set_bot name:name for the pseudo to use avatar_url:avater for the webhook 
 		Create a custom webhook with name and avatar url. The ChatBot will speek with it.
--	.remove_my_bot <name of the bot>
-		Remove your custom webhook named 'name'
-```
-clear converssation command:
-```txt
--   .clear_message_channel
-        Clear your message and bot's message if it respond to you.
+-	/settings remove_bot
+		Remove your custom webhook that existed in the context channel
 ```
 browse an instant answer:
 ```txt
--   .duckduckgo <query ..>
+-   /duckcuckgo question:anything you want to browse 
         Get an Instant Response from duckduckgo.
 ```
 And for the bot owner:
 ```txt
--   .shutdown
+-   /developper shutdown 
         Close the bot
 ```
 
