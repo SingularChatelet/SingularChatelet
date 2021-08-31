@@ -2,6 +2,7 @@ import sqlite3
 import aiosqlite
 
 from hikari import messages
+import hikari
 from lightbulb import slash_commands
 
 class SendWebhook():
@@ -32,8 +33,11 @@ class SendWebhook():
 
     async def has_manage_webhook_permission(self, ctx:slash_commands.SlashCommandContext) -> bool:
         """Check if bot has manage webhook permission."""
-        #TODO
-        return True
+        bot_member = ctx.bot.cache.get_member(ctx.guild_id, ctx.bot.cache.get_me().id)
+        perms = hikari.Permissions.NONE
+        for role in bot_member.get_roles():
+            perms |= role.permissions
+        return perms & hikari.Permissions.MANAGE_WEBHOOKS
 
     async def create_webhook_for(self, ctx:slash_commands.SlashCommandContext, name:str, avatar_url:str) -> None:
         """Create a new webhook and return url and avatar url"""
