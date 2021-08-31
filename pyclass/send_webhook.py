@@ -16,8 +16,8 @@ class SendWebhook():
     async def send(self, ctx:slash_commands.SlashCommandContext, message:str, question:str = None) -> None:
         urls = await self.get_webhook_urls_for(ctx.channel.id ,ctx.author.id)
         if urls == None:
-            bot_user = ctx.bot.get_me()
-            message = f"{bot_user.username if bot_user == None else 'Bot'} >> {message}"
+            bot_member = ctx.bot.cache.get_member(ctx.guild_id, ctx.bot.cache.get_me().id)
+            message = f"{bot_member.username if bot_member == None else 'Bot'} >> {message}"
             if question != None: 
                 message = f"{ctx.author.username} >> {question}\n" + message
             await ctx.respond(message)
