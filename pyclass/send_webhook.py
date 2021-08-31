@@ -1,6 +1,7 @@
 import sqlite3
 import aiosqlite
 
+import hikari
 from hikari import messages
 from lightbulb import slash_commands
 
@@ -15,8 +16,8 @@ class SendWebhook():
     async def send(self, ctx:slash_commands.SlashCommandContext, message:str, question:str = None) -> None:
         urls = await self.get_webhook_urls_for(ctx.channel.id ,ctx.author.id)
         if urls == None:
-            bot_user = ctx.bot.get_me()
-            message = f"{bot_user.username if bot_user == None else 'Bot'} >> {message}"
+            bot_member = ctx.bot.cache.get_member(ctx.guild_id, ctx.bot.cache.get_me().id)
+            message = f"{bot_member.username if bot_member == None else 'Bot'} >> {message}"
             if question != None: 
                 message = f"{ctx.author.username} >> {question}\n" + message
             await ctx.respond(message)
@@ -32,8 +33,11 @@ class SendWebhook():
 
     async def has_manage_webhook_permission(self, ctx:slash_commands.SlashCommandContext) -> bool:
         """Check if bot has manage webhook permission."""
-        #TODO
-        return True
+        bot_member = ctx.bot.cache.get_member(ctx.guild_id, ctx.bot.cache.get_me().id)
+        perms = hikari.Permissions.NONE
+        for role in bot_member.get_roles():
+            perms |= role.permissions
+        return perms & hikari.Permissions.MANAGE_WEBHOOKS
 
     async def create_webhook_for(self, ctx:slash_commands.SlashCommandContext, name:str, avatar_url:str) -> None:
         """Create a new webhook and return url and avatar url"""
