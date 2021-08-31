@@ -75,11 +75,12 @@ class DuckCuckGo(slash_commands.SlashCommand):
                         value='click link to see more',
                         inline=True
                     )
+        await context.respond(emb)
         emb.set_footer(
             text='duckducgo instant answer',
-            icon=hikari.File('https://duckduckgo.com/favicon.ico')
+            icon='https://duckduckgo.com/favicon.ico'
         )
-        await context.respond(embed=emb)
+        await context.edit_response(embed=emb)
 
 def load(bot:Bot):
     bot.add_slash_command(DuckCuckGo)
