@@ -1,6 +1,7 @@
 import sqlite3
 import aiosqlite
 
+import hikari
 from hikari import messages
 import hikari
 from lightbulb import slash_commands

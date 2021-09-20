@@ -1,12 +1,6 @@
+python-dotenv
 aiosqlite
-en_core_web_sm
-spacy
-torch
-
-git+https://github.com/SingularChatelet/ChatterBot.git
-git+https://github.com/SingularChatelet/chatterbot-corpus.git
-
-git+https://github.com/huggingface/transformers.git
+requests
 
 hikari
 hikari-lightbulb
