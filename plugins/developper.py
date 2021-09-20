@@ -6,41 +6,25 @@ from transformers import AutoModelForCausalLM
 from lightbulb import Bot
 from lightbulb import slash_commands
 
-class Developper(slash_commands.SlashCommandGroup):
-    @property
-    def description(self) -> str:
-        return "Commands for developpers"
+class Developper_Only(slash_commands.SlashCommandGroup):
+    description="Commands for the developpers"
 
-    @property
-    def enabled_guilds(self):
-        return None
-
-@Developper.subcommand()
+@Developper_Only.subcommand()
 class Shutdown(slash_commands.SlashSubCommand):
-    @property
-    def description(self) -> str:
-        return "Close the bot."
-
-    @property
-    def options(self):
-        return []
+    description="Close the bot."
 
     async def callback(self, context: slash_commands.SlashCommandContext) -> None:
         if context.author.id in [606758395583922176, 425965177616334849]:
-            context.respond('ok.')
+            await context.respond('ok.')
+            sleep(2)
             await context.bot.close()
         else:
-            context.respond('only the developpers of this bot can shut down the bot')
+            await context.respond('only the developpers of this bot can shut down the bot')
 
-@Developper.subcommand()
+
+@Developper_Only.subcommand()
 class Re_Init_Transformers_data(slash_commands.SlashSubCommand):
-    @property
-    def options(self):
-        return []
-
-    @property
-    def description(self) -> str:
-        return "If the data is corumpted by bias, re init the data."
+    description="If the data is corumpted by bias, re init the data."
 
     async def callback(self, context: slash_commands.SlashCommandContext) -> None:
         if context.author.id not in [606758395583922176, 425965177616334849]:
@@ -61,4 +45,4 @@ class Re_Init_Transformers_data(slash_commands.SlashSubCommand):
         await context.bot.rest.create_message(channel=channel, content='Download finish! All data were re init')
 
 def load(bot:Bot):
-    bot.add_slash_command(Developper)
+    bot.add_slash_command(Developper_Only)

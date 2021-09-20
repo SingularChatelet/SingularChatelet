@@ -3,36 +3,20 @@ from lightbulb import Bot
 from lightbulb import slash_commands
 
 class Settings(slash_commands.SlashCommandGroup):
-    @property
-    def description(self) -> str:
-        return "Settings for all chatbot commands"
-
-    @property
-    def enabled_guilds(self):
-        return None
+    description="Settings for all chatbot commands"
 
 @Settings.subcommand()
 class Set_Bot(slash_commands.SlashSubCommand):
-    @property
-    def options(self):
-        return [
-            hikari.CommandOption(
-                name="name",
-                description="Pseudo for your custom chatbot.",
-                type=hikari.OptionType.STRING,
-                is_required=True
-            ),
-            hikari.CommandOption(
-                name="avatar_url",
-                description="Avatar url for your custom chatbot.",
-                type=hikari.OptionType.STRING,
-                is_required=True
-            )
-        ]
-
-    @property
-    def description(self) -> str:
-        return "Create a custom webhook with name and avatar url. The ChatBot will speek with it."
+    description="Create a custom webhook with name and avatar url. The ChatBot will speek with it."
+    # Options:
+    bot_name : str = slash_commands.Option(
+        description="Pseudo for your custom chatbot.",
+        required=True
+    )
+    avatar_url : str = slash_commands.Option(
+        description="Avatar url for your custom chatbot.",
+        required=True
+    )
 
     async def callback(self, context: slash_commands.SlashCommandContext) -> None:
         if context.guild_id == None:
@@ -41,19 +25,13 @@ class Set_Bot(slash_commands.SlashSubCommand):
         if not await context.bot._chatbot_send.has_manage_webhook_permission(context):
             await context.respond('The bot has no permissions to create a webhook.')
             return None
-        name = context.options['name'].value
+        name = context.options['bot_name'].value
         avatar_url = context.options['avatar_url'].value
         await context.bot._chatbot_send.create_webhook_for(context, name, avatar_url)
 
 @Settings.subcommand()
 class Remove_Bot(slash_commands.SlashSubCommand):
-    @property
-    def options(self):
-        return []
-
-    @property
-    def description(self) -> str:
-        return "Remove your custom webhook in this channel"
+    description="Remove your custom webhook in this channel"
 
     async def callback(self, context:slash_commands.SlashCommandContext) -> None:
         if context.guild_id == None:

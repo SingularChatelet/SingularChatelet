@@ -6,24 +6,12 @@ from lightbulb import Bot
 from lightbulb import slash_commands
 
 class ChatterBot(slash_commands.SlashCommand):
-    @property
-    def options(self):
-        return [
-            hikari.CommandOption(
-                name="message",
-                description="Message to the chatbot.",
-                type=hikari.OptionType.STRING,
-                is_required=True
-            ),
-        ]
-    
-    @property
-    def description(self) -> str:
-        return "Use chatterbot.corpus.english and ChatterBot to generate response."
-
-    @property
-    def enabled_guilds(self):
-        return None
+    description="Use chatterbot.corpus.english and ChatterBot to generate response."
+    # Options:
+    message : str = slash_commands.Option(
+        description="Message to the chatbot.",
+        required=True
+    )
 
     async def callback(self, context:slash_commands.SlashCommandContext) -> None:
         if context.guild_id == None:
