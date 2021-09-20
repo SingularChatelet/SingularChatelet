@@ -3,24 +3,12 @@ from lightbulb import Bot
 from lightbulb import slash_commands
 
 class Help(slash_commands.SlashCommand):
-    @property
-    def options(self):
-        return [
-            hikari.CommandOption(
-                name="command",
-                description="Get Help for this command.",
-                type=hikari.OptionType.STRING,
-                is_required=False
-            )
-        ]
-
-    @property
-    def description(self) -> str:
-        return "Help for a command or give list of commands"
-    
-    @property
-    def enabled_guilds(self):
-        return None
+    description="Help for a command or give list of commands"
+    # Options:
+    command : str = slash_commands.Option(
+        description="Get Help for this command.",
+        required=False
+    )
 
     async def callback(self, context: slash_commands.SlashCommandContext) -> None:
         command = context.options.get('command')

@@ -1,4 +1,3 @@
-from hikari import embeds
 import requests
 from urllib import parse
 
@@ -6,28 +5,17 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
 import hikari
+from hikari import embeds
 from lightbulb import Bot
 from lightbulb import slash_commands
 
 class DuckCuckGo(slash_commands.SlashCommand):
-    @property
-    def options(self):
-        return [
-            hikari.CommandOption(
-                name="question",
-                description="Question for DuckDuckGo.",
-                type=hikari.OptionType.STRING,
-                is_required=True
-            ),
-        ]
-
-    @property
-    def description(self) -> str:
-        return "Get an Instant Response from duckduckgo."
-
-    @property
-    def enabled_guilds(self):
-        return None
+    description="Get an Instant Response from duckduckgo."
+    # Options:
+    question : str = slash_commands.Option(
+        description="Question for DuckDuckGo.",
+        required=True
+    )
 
     async def callback(self, context: slash_commands.SlashCommandContext) -> None:
         url = "https://api.duckduckgo.com/?q="
