@@ -1,6 +1,7 @@
 python-dotenv
 
 aiosqlite
+requests
 
 hikari
 hikari-lightbulb
