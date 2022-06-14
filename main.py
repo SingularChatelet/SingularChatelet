@@ -1,11 +1,10 @@
 import os
 from dotenv import load_dotenv
 
-from pyclass import send_webhook
+from pyclass.abstract_bot_app import AbstractBotApp
 
 # Discord Bot
 import hikari
-import lightbulb
 from hikari import presences
 
 load_dotenv()
@@ -13,17 +12,15 @@ load_dotenv()
 TOKEN = os.environ["DISCORD_TOKEN"]
 INTENTS = hikari.Intents.ALL
 
-bot = lightbulb.Bot(
+bot = AbstractBotApp(
     prefix='.',
     token=TOKEN,
     intents=INTENTS,
     logs="ERROR"
 )
-bot._chatbot_send = send_webhook.SendWebhook()
-
 for file in os.listdir('plugins'):
     if file.endswith('.py'):
-        bot.load_extension(f'plugins.{file[:-3]}')
+        bot.load_extensions(f'plugins.{file[:-3]}')
         print(f'added :: {file}')
 
 bot.run(

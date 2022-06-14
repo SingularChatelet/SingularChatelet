@@ -4,7 +4,7 @@ import aiosqlite
 import hikari
 from hikari import messages
 import hikari
-from lightbulb import slash_commands
+import lightbulb
 
 class SendWebhook():
     def __init__(self):
@@ -14,12 +14,19 @@ class SendWebhook():
             db.commit()
         print('class::SendWebhook::init -> ready')
 
-    async def send(self, ctx:slash_commands.SlashCommandContext, message:str, question:str = None) -> None:
-        urls = await self.get_webhook_urls_for(ctx.channel.id ,ctx.author.id)
-        if urls == None:
+    async def send(self, ctx: lightbulb.Context, message:str, question:str = None) -> None:
+        urls = await self.get_webhook_urls_for(ctx.channel_id, ctx.author.id)
+        webhook_id = None
+        try:
+            webhook_id = int(urls[0])
+        except Exception as _:
+            pass
+        if urls == None or webhook_id == None:
             bot_member = ctx.bot.cache.get_member(ctx.guild_id, ctx.bot.cache.get_me().id)
+            if bot_member == None:
+                return None
             message = f"{bot_member.username if bot_member == None else 'Bot'} >> {message}"
-            if question != None: 
+            if question != None:
                 message = f"{ctx.author.username} >> {question}\n" + message
             await ctx.respond(message)
             return None
@@ -27,29 +34,31 @@ class SendWebhook():
             message = f"{ctx.author.username} >> {question}\n" + f"Reply >> {message}"
         await ctx.bot.rest.execute_webhook(
             token=urls[1],
-            webhook=urls[0],
+            webhook=webhook_id,
             content=message
         )
         await ctx.respond('response sent', flags=messages.MessageFlag.EPHEMERAL)
 
-    async def has_manage_webhook_permission(self, ctx:slash_commands.SlashCommandContext) -> bool:
+    async def has_manage_webhook_permission(self, ctx: lightbulb.Context) -> bool:
         """Check if bot has manage webhook permission."""
         bot_member = ctx.bot.cache.get_member(ctx.guild_id, ctx.bot.cache.get_me().id)
+        if bot_member == None:
+            return False
         perms = hikari.Permissions.NONE
         for role in bot_member.get_roles():
             perms |= role.permissions
         return perms & hikari.Permissions.MANAGE_WEBHOOKS
 
-    async def create_webhook_for(self, ctx:slash_commands.SlashCommandContext, name:str, avatar_url:str) -> None:
+    async def create_webhook_for(self, ctx: lightbulb.Context, name:str, avatar_url:str) -> None:
         """Create a new webhook and return url and avatar url"""
         async with aiosqlite.connect(self.db_path) as db:
-            async with db.execute('SELECT * FROM webhook_table WHERE channel_id=? AND user_id=?', (ctx.channel.id, ctx.author.id)) as cursor:
+            async with db.execute('SELECT * FROM webhook_table WHERE channel_id=? AND user_id=?', (ctx.channel_id, ctx.author.id)) as cursor:
                 data = await cursor.fetchone()
         if data != None:
             await ctx.respond('A webhook already exists (do `/help remove_my_bot`)')
             return None
         webhook = await ctx.bot.rest.create_webhook(
-            channel=ctx.channel_id, 
+            channel=ctx.channel_id,
             name=name,
             avatar=avatar_url,
             reason=f'custom SingularChatelet response for {ctx.author.username}'

@@ -2,15 +2,17 @@ import lightbulb
 from lightbulb.events import CommandErrorEvent
 from lightbulb.errors import CommandNotFound
 
-class On_Event(lightbulb.Plugin):
+from pyclass.abstract_bot_app import AbstractBotApp as Bot
 
-    @lightbulb.listener(CommandErrorEvent)
-    async def on_command_error(self, event:CommandErrorEvent):
-        if isinstance(event.exception, CommandNotFound):
-            if not event.message.content.startswith('..'):
-                await event.message.respond('this command dont exists')
-        else:
-            print(event.exception.with_traceback)
+# plugin = lightbulb.Plugin("Events")
+#
+# @plugin.listener(CommandErrorEvent)
+# async def smth(event: CommandErrorEvent) -> None:
+#     if isinstance(event.exception, CommandNotFound):
+#         await event.context.respond('this command dont exists')
+#     else:
+#         print(event.exception.with_traceback(None))
 
-def load(bot:lightbulb.Bot):
-    bot.add_plugin(On_Event())
+def load(bot: Bot):
+    return None
+    # bot.add_plugin(plugin)

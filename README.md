@@ -38,7 +38,8 @@ And for the bot owner:
 ## launch
 
 ```shell
-python -m pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
+python3 -m spacy download en_core_web_sm
 ```
 
 ```shell
