@@ -5,7 +5,7 @@ import lightbulb
 plugin = lightbulb.Plugin("Help")
 
 @plugin.command
-@lightbulb.option("command", "Get Help for this command.", required=True)
+@lightbulb.option("command", "Get Help for this command.", required=False)
 @lightbulb.command("help", "Help for a command or give list of commands")
 @lightbulb.implements(lightbulb.SlashCommand)
 async def smth(context: lightbulb.Context) -> None:
