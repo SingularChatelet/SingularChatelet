@@ -10,7 +10,7 @@ import lightbulb
 plugin = lightbulb.Plugin("Aichatbot")
 
 def requests_abstract(url, headers, querystring):
-    """abstract the requests call"""
+    """Abstract the requests call."""
     res = requests.request("GET", url, headers=headers, params=querystring)
     return res
 

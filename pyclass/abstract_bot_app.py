@@ -20,7 +20,7 @@ class AbstractBotApp(lightbulb.BotApp):
     def __init__(self, **kwargs):
         """
         Abstract of lightbulb.BotApp
-        But needed this to add some data to the class
+        But needed this to add some data to the class.
         """
         super().__init__(**kwargs)
         self._chatbot_send = SendWebhook()
