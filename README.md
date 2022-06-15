@@ -2,11 +2,10 @@
 
 A discord bot to speak with.
 
-if you want to invite it : [click here](https://discord.com/api/oauth2/authorize?client_id=710407264070139944&permissions=536870912&scope=bot%20applications.commands)
+if you want to invite it : [click here](https://discord.com/oauth2/authorize?client_id=710407264070139944&permissions=415001528384&scope=bot%20applications.commands)
 notice that :
 - it will be online only 22days/month
 - it has only `/brainshopai` and `/aichatbot` slash commands to chat with (because other command use more disk space)
-- the branch using for deployment is the `master`
 
 ## commands
 
@@ -23,38 +22,45 @@ It has 4 chat slash commands:
 ```
 You can set a custom bot that respond to you (It need manage webhooks permission)
 ```txt
--	/settings set_bot name:name avatar_url:avatar_url 
+-	/bot create_custom name:name avatar_url:avatar_url 
 		Create a custom webhook with name and avatar url. The ChatBot will speek with it.
--	/settings remove_bot 
+-	/bot remove_custom 
 		Remove your custom webhook that exists in the context channel
 ```
 1 search command:
 ```txt
--   /duckduckgo question:question to browse
+-   /ddg question:question to browse
         Get an Instant Response from duckduckgo
 ```
 And for the bot owner:
 ```txt
--   /re_init_transformers_data
+-   /developpers re_init_transformers_data
         If the data is corumpted by bias, re init the data.
--   /shutdown
+-   /developpers shutdown
         Close the bot
 ```
 
 ## launch
 
+1. install dependencies
 ```shell
 python3 -m pip install -r requirements.txt
+python3 -m pip install -r requirements_full.txt
 python3 -m spacy download en_core_web_sm
 ```
+or 
+```shell
+./install.sh
+```
 
+2. start
 ```shell
 python main.py
 ```
 
 ## folder
 
--   /cogs                               : where commmands are
+-   /plugins                            : where commmands are
 -   /data/chatterbot                    : the database for chatterbot
 -   /data/transformers                  : the database for transformers
 -   /data/documentations-ressources     : .txt file with good ressource to start
