@@ -4,7 +4,8 @@ from .send_webhook import SendWebhook
 try:
     from transformers import AutoTokenizer
     from transformers import AutoModelForCausalLM
-    import torch as _
+    import torch
+    print(f"torch version: {torch.__version__}")
     full_bot_transformers = True
 except ModuleNotFoundError:
     full_bot_transformers = False
@@ -18,8 +19,7 @@ except ModuleNotFoundError:
 
 class AbstractBotApp(lightbulb.BotApp):
     def __init__(self, **kwargs):
-        """
-        Abstract of lightbulb.BotApp
+        """Abstract of lightbulb.BotApp.
         But needed this to add some data to the class.
         """
         super().__init__(**kwargs)
