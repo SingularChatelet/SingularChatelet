@@ -4,7 +4,6 @@ import requests
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
-import hikari
 from pyclass.abstract_bot_app import AbstractBotApp as Bot
 import lightbulb
 

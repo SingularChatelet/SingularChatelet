@@ -4,8 +4,8 @@ A discord bot to speak with.
 
 if you want to invite it : [click here](https://discord.com/oauth2/authorize?client_id=710407264070139944&permissions=415001528384&scope=bot%20applications.commands)
 notice that :
-- it will be online only 22days/month
-- it has only `/brainshopai` and `/aichatbot` slash commands to chat with (because other command use more disk space)
+-   it will be online only 22days/month
+-   it has only `/brainshopai` and `/aichatbot` slash commands to chat with (because other command use more disk space)
 
 ## commands
 
@@ -42,7 +42,7 @@ And for the bot owner:
 
 ## launch
 
-1. install dependencies
+1.  install dependencies
 ```shell
 python3 -m pip install -r requirements.txt
 python3 -m pip install -r requirements_full.txt
@@ -53,7 +53,7 @@ or
 ./install.sh
 ```
 
-2. start
+2.  start
 ```shell
 python main.py
 ```

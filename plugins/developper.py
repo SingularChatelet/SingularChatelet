@@ -8,7 +8,6 @@ try:
 except ModuleNotFoundError:
     transformers_availible = False
 
-import hikari
 from pyclass.abstract_bot_app import AbstractBotApp as Bot
 import lightbulb
 
