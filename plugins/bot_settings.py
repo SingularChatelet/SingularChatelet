@@ -42,5 +42,13 @@ async def bot_func_rem(context: lightbulb.Context) -> None:
     await context.bot._chatbot_send.delete_webhook_from_db(context.author.id, context.channel_id)
     await context.respond('Custom webhook has been removed')
 
+@parent.child
+@lightbulb.command("invite", "get link to invite the bot")
+@lightbulb.implements(lightbulb.SlashSubCommand)
+async def incite(context: lightbulb.Context) -> None:
+    await context.respond(
+        "https://discord.com/api/oauth2/authorize?client_id=710407264070139944&permissions=415001528384&scope=bot%20applications.commands"
+    )
+
 def load(bot:Bot):
     bot.add_plugin(plugin)
