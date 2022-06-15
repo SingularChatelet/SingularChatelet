@@ -3,7 +3,11 @@ import datetime
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 # Transformers
-import torch
+try:
+    import torch
+    torch_availibe = True
+except ModuleNotFoundError:
+    torch_availibe = False
 
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
@@ -65,6 +69,8 @@ def wraper_tokenizer_decode(bot, outputs, inputs_history):
 @lightbulb.command("pytorch", "Uses microsoft/DialoGPT-large and pytorch to generate the response.")
 @lightbulb.implements(lightbulb.SlashCommand)
 async def smth(context: lightbulb.Context) -> None:
+    if torch_availibe == False:
+        return
     if context.guild_id == None:
         await context.respond('Command only availible on guild channel')
         return None
@@ -103,4 +109,6 @@ async def smth(context: lightbulb.Context) -> None:
     await context.bot._chatbot_send.send(context, str(response), context.options['message'])
 
 def load(bot:Bot):
+    if bot._full_bot_transformers == False:
+        return None
     bot.add_plugin(plugin)

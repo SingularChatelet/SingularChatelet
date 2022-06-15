@@ -24,4 +24,6 @@ async def smth(context: lightbulb.Context) -> None:
     await context.bot._chatbot_send.send(context, str(response), context.options['message'])
 
 def load(bot:Bot):
+    if bot._full_bot_chatterbot == False:
+        return None
     bot.add_plugin(plugin)
