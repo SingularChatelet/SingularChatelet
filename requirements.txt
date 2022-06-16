@@ -3,6 +3,7 @@ python-dotenv
 aiosqlite
 requests
 detectlanguage
+cheat-sh
 
 hikari
 hikari-lightbulb
