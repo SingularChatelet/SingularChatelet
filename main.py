@@ -11,8 +11,10 @@ load_dotenv()
 
 TOKEN = os.environ["DISCORD_TOKEN"]
 INTENTS = hikari.Intents.ALL
+api_detect_language_secret = os.environ["DETECTLANGUAGE_TOKEN"]
 
 bot = AbstractBotApp(
+    api_detect_language_secret=api_detect_language_secret,
     prefix='.',
     token=TOKEN,
     intents=INTENTS,

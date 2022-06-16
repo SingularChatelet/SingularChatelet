@@ -1,5 +1,6 @@
 import lightbulb
 from .send_webhook import SendWebhook
+import detectlanguage
 
 try:
     from transformers import AutoTokenizer
@@ -18,12 +19,14 @@ except ModuleNotFoundError:
     full_bot_chatterbot = False
 
 class AbstractBotApp(lightbulb.BotApp):
-    def __init__(self, **kwargs):
+    def __init__(self, api_detect_language_secret: str, **kwargs):
         """Abstract of lightbulb.BotApp.
         But needed this to add some data to the class.
         """
         super().__init__(**kwargs)
         self._chatbot_send = SendWebhook()
+        self._detectlanguage = detectlanguage
+        self._detectlanguage.configuration.api_key = api_detect_language_secret
         self._full_bot_transformers = full_bot_transformers
         if full_bot_transformers == True:
             # Transformers
