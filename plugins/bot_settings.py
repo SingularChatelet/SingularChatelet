@@ -49,5 +49,11 @@ async def incite(context: lightbulb.Context) -> None:
         "https://discord.com/api/oauth2/authorize?client_id=710407264070139944&permissions=415001528384&scope=bot%20applications.commands"
     )
 
+@parent.child
+@lightbulb.command("source", "get source code of bot")
+@lightbulb.implements(lightbulb.SlashSubCommand)
+async def source(context: lightbulb.Context) -> None:
+    await context.respond("https://github.com/SingularChatelet/SingularChatelet")
+
 def load(bot:Bot):
     bot.add_plugin(plugin)
