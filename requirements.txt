@@ -2,6 +2,7 @@ python-dotenv
 
 aiosqlite
 requests
+detectlanguage
 
 hikari
 hikari-lightbulb
