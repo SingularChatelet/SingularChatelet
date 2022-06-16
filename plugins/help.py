@@ -8,7 +8,10 @@ plugin = lightbulb.Plugin("Help")
 @lightbulb.command("help", "Help for a command or give list of commands")
 @lightbulb.implements(lightbulb.SlashCommand)
 async def smth(context: lightbulb.Context) -> None:
-    command = context.options.get('command')
+    if context.options != None or 'command' in context.options:
+        command = context.options['command']
+    else:
+        command = None
     if command == None:
         all_commands = [x for x in context.bot.slash_commands]
         await context.respond(f"All commands : {', '.join(all_commands)}")
