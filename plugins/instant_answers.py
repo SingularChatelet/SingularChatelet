@@ -96,5 +96,32 @@ async def chtsh(context: lightbulb.Context) -> None:
     emb.set_footer(text='cheat.sh answer')
     await res.edit(embed=emb)
 
+def get_full_language_name(bot: Bot, lang_code: str) -> str:
+    all_l = bot._detectlanguage.languages()
+    for elem in all_l:
+        if elem['code'] == lang_code:
+            return elem['name']
+    return 'Unknown'
+
+@plugin.command
+@lightbulb.option('text', 'text to process', required=True)
+@lightbulb.command('detectlanguage', 'detetct natural language used (ex: fr/en/...)')
+@lightbulb.implements(lightbulb.SlashCommand)
+async def detetc(context: lightbulb.Context) -> None:
+    bot: Bot = context.bot
+    text = context.options['text']
+    lang = bot._detectlanguage.detect(text)
+    emb = hikari.Embed(
+        title='Language Detection',
+        description=f'text: {text}',
+        color=0x2ae53f
+    )
+    for elem in lang:
+        emb.add_field(
+            name=get_full_language_name(bot, lang),
+            value=f'confidence: {elem["confidence"]}'
+        )
+    await context.respond(embed=emb)
+
 def load(bot: Bot):
     bot.add_plugin(plugin)

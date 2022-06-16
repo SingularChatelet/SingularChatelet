@@ -37,6 +37,7 @@ if transformers_availible == True:
     async def bot_func_rem(context: lightbulb.Context) -> None:
         if context.author.id not in [606758395583922176, 425965177616334849]:
             await context.respond('only the developpers of this bot can shut down the bot')
+            return None
         for file in os.listdir('./data/transformers'):
             if not file.endswith('.txt'):
                 os.remove(f'data/transformers/{file}')
@@ -51,6 +52,17 @@ if transformers_availible == True:
         )
         channel = context.get_channel()
         await context.bot.rest.create_message(channel=channel, content='Download finish! All data were re init')
+
+@parent.child
+@lightbulb.command("detectlanguage_status", "Get status of detectlanguage api")
+@lightbulb.implements(lightbulb.SlashSubCommand)
+async def status(context: lightbulb.Context) -> None:
+    if context.author.id not in [606758395583922176, 425965177616334849]:
+        await context.respond('only the developpers of this bot can shut down the bot')
+        return None
+    bot: Bot = context.bot
+    statu = bot._detectlanguage.user_status()
+    await context.respond(f'{statu}')
 
 def load(bot:Bot):
     bot.add_plugin(plugin)
