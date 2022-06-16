@@ -16,7 +16,7 @@ async def smth(context: lightbulb.Context) -> None:
         all_commands = [x for x in context.bot.slash_commands]
         await context.respond(f"All commands : {', '.join(all_commands)}")
         return None
-    command = context.bot.get_slash_command(command.name)
+    command = context.bot.get_slash_command(command)
     if command == None:
         all_commands = [x for x in context.bot.slash_commands]
         await context.respond(
