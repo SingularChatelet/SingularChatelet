@@ -70,7 +70,7 @@ async def smth(context: lightbulb.Context) -> None:
     await res.edit(embed=emb)
 
 @plugin.command
-@lightbulb.option("question", "Question related to programing languages", required=True)
+@lightbulb.option("question", "Question related to programing languages, you can start with the programing language name ti have specifi response", required=True)
 @lightbulb.command("chtsh", "Get response from http://cheat.sh")
 @lightbulb.implements(lightbulb.SlashCommand)
 async def chtsh(context: lightbulb.Context) -> None:
