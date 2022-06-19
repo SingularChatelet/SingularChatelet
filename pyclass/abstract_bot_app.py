@@ -48,5 +48,5 @@ class AbstractBotApp(lightbulb.BotApp):
             )
             trainer_corpus = ChatterBotCorpusTrainer(self._chatterbot_chatbot, show_training_progress=False)
             trainer_corpus.train(
-                '../data/chatterbot/english/'
+                './data/chatterbot/english/'
             )
