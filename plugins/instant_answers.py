@@ -118,7 +118,7 @@ async def detetc(context: lightbulb.Context) -> None:
     )
     for elem in lang:
         emb.add_field(
-            name=get_full_language_name(bot, lang),
+            name=get_full_language_name(bot, lang["language"]),
             value=f'confidence: {elem["confidence"]}'
         )
     await context.respond(embed=emb)
