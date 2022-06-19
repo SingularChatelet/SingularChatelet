@@ -14,13 +14,14 @@ async def smth(context: lightbulb.Context) -> None:
     if context.guild_id == None:
         await context.respond('Command only availible on a guild channel')
         return None
+    bot: Bot = context.bot
     loop = asyncio.get_event_loop()
     response = await loop.run_in_executor(
         ThreadPoolExecutor(),
-        context.bot._chatterbot_chatbot.get_response,
+        bot._chatterbot_chatbot.get_response,
         context.options['message']
     )
-    await context.bot._chatbot_send.send(context, str(response), context.options['message'])
+    await bot._chatbot_send.send(context, str(response), context.options['message'])
 
 def load(bot:Bot):
     if bot._full_bot_chatterbot == False:
