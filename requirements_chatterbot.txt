@@ -2,4 +2,3 @@ spacy
 pyyaml
 
 git+https://github.com/SingularChatelet/ChatterBot.git
-git+https://github.com/SingularChatelet/chatterbot-corpus.git
