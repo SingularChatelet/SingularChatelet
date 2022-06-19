@@ -1,1 +1,1 @@
-worker: ./start.sh --not-full
+worker: ./start.sh --no-transformers
