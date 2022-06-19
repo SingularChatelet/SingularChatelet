@@ -41,10 +41,12 @@ class AbstractBotApp(lightbulb.BotApp):
                 name='SingularChatelet',
                 read_only=False,
                 storage_adapter='chatterbot.storage.SQLStorageAdapter',
-                database_uri='sqlite:///data/chatterbot/db.sqlite3',
+                database_uri='sqlite:///data/chatterbot/db/db.sqlite3',
                 logic_adaptaters=[
                     'chatterbot.logic.BestMatch',
                 ]
             )
             trainer_corpus = ChatterBotCorpusTrainer(self._chatterbot_chatbot, show_training_progress=False)
-            trainer_corpus.train('chatterbot.corpus.english')
+            trainer_corpus.train(
+                '../data/chatterbot/english/'
+            )

@@ -1,6 +1,6 @@
 __pycache__
 .env
 data/transformers/
-data/chatterbot/
+data/chatterbot/db/
 lib/
 .vscode
