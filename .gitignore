@@ -2,7 +2,7 @@ __pycache__
 .env
 tmp_txt
 data/transformers/
-data/chatterbot/db/
+data/chatterbot/db/*
 lib/
 .vscode
 data/Question_Answer_Dataset*
