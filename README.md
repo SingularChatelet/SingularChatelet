@@ -55,7 +55,7 @@ or
 
 2.  start
 ```shell
-python main.py
+python3 main.py
 ```
 
 ## folder
