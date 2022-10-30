@@ -2,10 +2,11 @@
 
 A discord bot to speak with.
 
+You cant host it if u want
+
 if you want to invite it : [click here](https://discord.com/oauth2/authorize?client_id=710407264070139944&permissions=415001528384&scope=bot%20applications.commands)
 notice that :
--   it will be online only 22days/month
--   it has only `/brainshopai` and `/aichatbot` slash commands to chat with (because other command use more disk space)
+- it will run only when i run it
 
 ## commands
 
@@ -22,10 +23,10 @@ It has 4 chat slash commands:
 ```
 You can set a custom bot that respond to you (It need manage webhooks permission)
 ```txt
--	/bot create_custom name:name avatar_url:avatar_url 
-		Create a custom webhook with name and avatar url. The ChatBot will speek with it.
--	/bot remove_custom 
-		Remove your custom webhook that exists in the context channel
+-    /bot create_custom name:name avatar_url:avatar_url 
+        Create a custom webhook with name and avatar url. The ChatBot will speek with it.
+-    /bot remove_custom 
+        Remove your custom webhook that exists in the context channel
 ```
 1 search command:
 ```txt
